@@ -1,0 +1,42 @@
+class Solution {
+    public void sw(int[] a, int x, int y)
+    {
+        int temp=a[x];
+        a[x]=a[y];
+        a[y]=temp;
+    }
+    public void sortColors(int[] nums) {
+//         Approach 1 by counting
+//         int z=0,two=0,one=0;
+//         for(int x: nums)
+//         {
+//             if(x==0) z++;
+//             else if(x==2) two++;
+//             else one++;
+//         }
+//         int i=0;
+       
+//             while(z-->0) nums[i++]=0;
+//             while(one-->0) nums[i++]=1;
+//             while(two-->0) nums[i++]=2;
+        
+         
+        // Approach 2
+         int l=0,m=0,r=nums.length-1;
+            while(m<=r)
+            {
+                if(nums[m]==1)
+                {
+                    m++;
+                }
+                else if(nums[m]==0)
+                {
+                    sw(nums,l++,m++);
+                }
+                else
+                    sw(nums,m,r--);
+            }
+  
+    }
+    
+}
