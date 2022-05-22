@@ -1,0 +1,28 @@
+class Solution {
+    public int majorityElement(int[] a) {
+        int cur=a[0];
+        int c=1,ind=0; 
+        for(int i=1;i<a.length;i++)
+        {
+            if(cur==a[i]) 
+            {
+                c++; 
+            }
+            else
+            {
+                c--;
+                if(c==0)
+                {
+                    cur=a[i];
+                    c=1;
+                }
+                
+                
+            }
+        }
+        
+      return cur;
+        
+            
+    }
+}
