@@ -1,0 +1,12 @@
+class Solution {
+    public int maxProfit(int[] p) {
+        int min_so_far=p[0];
+        int mxP=0;
+        for(int i=1;i<p.length;i++)
+        {
+            min_so_far=Math.min(min_so_far,p[i]);
+            mxP=Math.max(mxP,p[i]-min_so_far);
+        }
+        return mxP;
+    }
+}
