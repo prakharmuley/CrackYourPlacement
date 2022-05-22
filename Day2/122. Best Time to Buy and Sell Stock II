@@ -1,0 +1,35 @@
+Approach 1
+class Solution {
+    public int maxProfit(int[] p) {
+        int min_so_far=p[0];
+        int mxP=0;
+        for(int i=0;i<p.length;i++)
+        {
+           if(p[i]<min_so_far)
+           {
+               min_so_far=p[i];
+               
+           }
+            if(p[i]-min_so_far>0)
+            {
+                mxP+=p[i]-min_so_far;
+                min_so_far=p[i];
+            }
+        }
+        return mxP;
+    }
+}
+
+
+Approach2
+class Solution {
+    public int maxProfit(int[] p) {
+        int min_so_far=p[0];
+        int mxP=0;
+        for(int i=0;i+1<p.length;i++)
+        {
+           mxP+=(p[i+1]-p[i]>0?p[i+1]-p[i]:0);
+        }
+        return mxP;
+    }
+}
