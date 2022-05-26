@@ -1,0 +1,43 @@
+class Solution {
+    public int count_neighbours(int[][] a, int[][] b, int n, int m, int i, int j)
+    {
+        
+        int cnt=0;
+            if(i-1>=0&&b[i-1][j]==1)  cnt++;
+            if(i+1<n&&b[i+1][j]==1) cnt++;
+            if(j-1>=0&&b[i][j-1]==1) cnt++;
+            if(j+1<m&&b[i][j+1]==1) cnt++;
+            if(i-1>=0&&j+1<m&&b[i-1][j+1]==1) cnt++;
+            if(i+1<n&&j-1>=0&&b[i+1][j-1]==1) cnt++;
+            if(i+1<n&&j+1<m&&b[i+1][j+1]==1) cnt++;
+            if(i-1>=0&&j-1>=0&&b[i-1][j-1]==1) cnt++;
+        
+        return cnt;
+        
+    }
+    public void gameOfLife(int[][] b) {
+        int n=b.length;
+        int m=b[0].length;
+        int[][] a=new int[n][m];
+        
+         for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++) 
+            {
+                if(b[i][j]==0){
+                 if(count_neighbours(a,b,n,m,i,j)==3) a[i][j]=1;
+                }
+                else
+                {
+                     if(count_neighbours(a,b,n,m,i,j)>=2&&count_neighbours(a,b,n,m,i,j)<=3) a[i][j]=1;
+                    
+                }        
+            }
+        }
+       
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++) b[i][j]=a[i][j];
+        }
+    }
+}
