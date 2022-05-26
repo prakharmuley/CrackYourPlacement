@@ -1,0 +1,25 @@
+class Solution {
+    public int maxScore(int[] c, int k) {
+        int n=c.length;
+        int sum=0;
+        for(int i=0;i<n;i++)
+        {
+           sum+=c[i];
+        }
+        if(n==k) return sum;
+        int win=0;
+        for(int i=0;i<n-k-1;i++)
+        {
+            win+=c[i];
+        }
+        int ans=0;
+        for(int i=n-k-1;i<n;i++)
+        {
+            win+=c[i];
+            ans=Math.max(ans,sum-win);
+            win-=c[i-(n-k-1)];   
+        }
+
+        return ans;
+    }
+}
