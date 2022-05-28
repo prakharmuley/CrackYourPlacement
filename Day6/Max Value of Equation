@@ -1,0 +1,19 @@
+class Solution {
+    public int findMaxValueOfEquation(int[][] p, int k) {
+       PriorityQueue<int[]> pq=new PriorityQueue<>((a,b)->b[0]-a[0]);
+        int mx=Integer.MIN_VALUE;
+        for(int i=0;i<p.length;i++)
+        {   
+        while(!pq.isEmpty()&&p[i][0]-pq.peek()[1]>k)
+         {
+           pq.poll();
+         }
+        if(!pq.isEmpty())
+         {
+             mx=Math.max(mx,p[i][1]+p[i][0]+pq.peek()[0]);
+         }
+            pq.offer(new int[]{p[i][1]-p[i][0],p[i][0]});
+        }
+        return mx;
+    }
+}
