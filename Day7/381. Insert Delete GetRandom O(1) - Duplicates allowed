@@ -1,0 +1,63 @@
+class RandomizedCollection {
+   Random r;
+    Map<Integer,Set<Integer>> mp;
+    ArrayList<Integer> l;
+    public RandomizedCollection() {
+        r=new Random();
+        mp=new HashMap<>();
+        l=new ArrayList<>();
+    }
+    
+    public boolean insert(int val) {
+        boolean f=!(mp.containsKey(val));
+        if(f)
+        {
+            mp.put(val,new HashSet<>());
+        }
+       
+        mp.get(val).add(l.size());
+        l.add(val);
+        return f;
+    }
+    
+    public boolean remove(int val) {
+         boolean f=(mp.containsKey(val));
+        if(f){
+         Set<Integer> hs=mp.get(val);
+         int idx_to_remove=hs.iterator().next();
+           if(hs.size()==1)
+           {
+              mp.remove(val);
+           }
+            else
+            {
+                hs.remove(idx_to_remove);
+            }
+            int last_idx=l.size()-1;
+            if(idx_to_remove!=last_idx)
+            {
+                int last_val=l.get(last_idx);
+                Set<Integer> h=mp.get(last_val);
+                h.add(idx_to_remove);
+                h.remove(last_idx);
+                l.set(idx_to_remove,last_val);
+            }
+            l.remove(last_idx);
+            
+            
+        }
+         return f;
+    }
+    
+    public int getRandom() {
+        return (int)l.get((int)Math.random()*l.size());
+    }
+}
+
+/**
+ * Your RandomizedCollection object will be instantiated and called as such:
+ * RandomizedCollection obj = new RandomizedCollection();
+ * boolean param_1 = obj.insert(val);
+ * boolean param_2 = obj.remove(val);
+ * int param_3 = obj.getRandom();
+ */
