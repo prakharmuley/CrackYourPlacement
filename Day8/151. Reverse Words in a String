@@ -1,0 +1,40 @@
+class Solution {
+    public String reverse(String s)
+    {
+        char ch[]=s.toCharArray();
+        for(int i=0;i<(s.length()/2);i++)
+        {
+            char temp=ch[i];
+            ch[i]=ch[s.length()-1-i];
+            ch[s.length()-1-i]=temp;
+        }
+        return new String(ch);
+    }
+    public String reverseWords(String s) {
+        int l=0,r=s.length()-1;
+        String ss=new String();
+        StringBuilder sb=new StringBuilder();
+        char ch[]=s.toCharArray();
+        while(l<s.length()&&ch[l]==' ') l++;
+        while(r>0&&ch[r]==' ') r--;
+        
+        while(l<=r)
+         {
+            
+          while(r>=0&&ch[r]!=' ')
+          {
+            ss+=ch[r];
+            r--;
+          }
+        
+          sb.append(reverse(ss));
+          ss=new String();
+          while(r>=0&&ch[r]==' ') {r--;}
+          sb.append(' ');
+          }
+        
+        sb.deleteCharAt(sb.length()-1);
+        
+        return sb.toString();
+    }
+}
