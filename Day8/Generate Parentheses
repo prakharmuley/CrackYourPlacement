@@ -1,0 +1,17 @@
+class Solution {
+    public void dfs(String s, List<String> l, int o, int c, int n)
+    {
+        if(s.length()==2*n)
+        {
+            l.add(s);
+            return;
+        }
+        if(o<n) dfs(s+"(",l,o+1,c,n);
+        if(c<o) dfs(s+")",l,o,c+1,n);
+    }
+    public List<String> generateParenthesis(int n) {
+       List<String> l=new ArrayList<>();
+        dfs(new String(),l,0,0,n);
+        return l;
+    }
+}
