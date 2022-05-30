@@ -1,0 +1,19 @@
+class Solution {
+    // public int strStr(String haystack, String needle) {
+    //     return haystack.indexOf(needle);
+    // }
+    
+     public int strStr(String hs, String ss) {
+         int h=hs.length();
+         int s=ss.length();
+         for(int i=0;i<h-s+1;i++)
+         {
+             if(hs.substring(i,i+s).equals(ss))
+             {
+                 return i;
+             }
+         }
+         return -1;
+       
+    }
+}
