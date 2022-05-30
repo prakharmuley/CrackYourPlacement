@@ -1,0 +1,40 @@
+class Solution {
+    public List<List<String>> groupAnagrams(String[] s) {
+       String sc[]=new String[s.length];
+        List<List<String>> l=new ArrayList<>();
+        Map<String,List<String>> mp=new HashMap<>();
+       for(int i=0;i<s.length;i++)
+       {
+           char c[]=s[i].toCharArray();
+           Arrays.sort(c);
+           sc[i]=new String(c);
+       }
+       
+       for(int i=0;i<sc.length;i++)
+       {
+           
+           if(!mp.containsKey(sc[i]))
+           {
+               List<String> al=new ArrayList<>();
+               al.add(s[i]);
+               mp.put(sc[i],al);
+           }
+           else
+           {
+               List<String> al=mp.get(sc[i]);
+               al.add(s[i]);
+               mp.put(sc[i],al);
+           }
+       }
+       for(Map.Entry<String,List<String>> e: mp.entrySet())
+       {
+           l.add(e.getValue());
+       }
+        return l;
+       
+        
+        
+        
+        
+    }
+}
