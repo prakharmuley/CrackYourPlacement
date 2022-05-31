@@ -1,0 +1,35 @@
+class Solution {
+    
+    private int _gcd(int a, int b) {
+        if ( a==0 ) return b;
+        return _gcd ( b%a, a );
+    }
+    
+    public int maxPoints(int[][] p) {
+        int mx=0;
+        if(p.length < 3) return p.length;  
+        for(int i=0;i+1<p.length;i++)
+        {
+            Map<String,Integer> mp=new HashMap<>();
+            int same_point=1;
+            for(int j=0;j<p.length;j++)
+            {
+                
+                    if(i==j) continue;
+                    int num=(p[j][1]-p[i][1]);
+                    int den=(p[j][0]-p[i][0]);
+                    int gcd=_gcd(num,den);
+                    num/=gcd;
+                    den/=gcd;
+                    String s=String.valueOf(num)+"->"+String.valueOf(den);
+                    if(!mp.containsKey(s)) mp.put(s,2);
+                    else mp.put(s,mp.get(s)+1);
+                    mx=Math.max(mx,mp.get(s));
+                 
+            }
+          
+        }
+       
+        return mx;
+    }
+}
