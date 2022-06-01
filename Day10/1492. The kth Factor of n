@@ -1,9 +1,8 @@
-
+//Approach 1 : S.C O(N)
 class Solution {
- 
     public int kthFactor(int n, int k) {
-        LinkedList<Integer> l1=new LinkedList<>();
-      int sq=(int)Math.sqrt(n);
+       LinkedList<Integer> l1=new LinkedList<>();
+       int sq=(int)Math.sqrt(n);
         
        for(int i=sq;i>=1;i--)
        {
@@ -23,11 +22,26 @@ class Solution {
        }
       
         if(k>l1.size()) return -1;
-        
-        
-           
-        return l1.get(k-1);
-       
-        
+             
+        return l1.get(k-1);     
+    }
+}
+
+//Appraoch 2: S.C  O(1)
+class Solution {
+    public int kthFactor(int n, int k) {
+     
+       float root = (float)Math.sqrt(n);
+
+    for (int i=1; i<root; i++) {
+        if (n % i == 0 && --k == 0) return i;
+    }
+
+    for (int i=(int)root; i>0; i--) {
+        if (n % i == 0 && --k == 0) return n/i;
+    }
+
+    return -1;    
+            
     }
 }
