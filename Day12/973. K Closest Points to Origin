@@ -1,0 +1,53 @@
+class Solution {
+    public int[][] kClosest(int[][] points, int k) {
+        if(k==points.length) return points;
+        List<int[]> l=new ArrayList<>();
+        Pair p[]=new Pair[points.length];
+        int a[]=new int[points.length];
+        Map<Integer,ArrayList<Pair>> mp=new HashMap<>();
+        for(int i=0;i<points.length;i++)
+        {
+           int distance=((points[i][1]*points[i][1])+(points[i][0]*points[i][0]));
+            p[i]=new Pair(points[i][0],points[i][1]);
+            a[i]=distance;
+            if(!mp.containsKey(a[i])){
+                ArrayList<Pair> pal=new ArrayList<>();
+                pal.add(new Pair(p[i].x,p[i].y));
+                mp.put(distance,pal);
+            }
+            else
+            {
+                ArrayList<Pair> ll=mp.get(a[i]);
+                ll.add(new Pair(p[i].x,p[i].y));
+                mp.put(a[i],ll);
+            }
+        }
+        Arrays.sort(a);
+        int ans[][]=new int[k][2];
+        int i=0;
+        while(i<points.length&&k>0)
+        {
+            ArrayList<Pair> pair=mp.get(a[i]);
+            ans[i][0]=pair.get(mp.get(a[i]).size()-1).x;
+            ans[i][1]=pair.get(mp.get(a[i]).size()-1).y;
+            if(pair.size()>1)
+            {
+                pair.remove(pair.size()-1);
+            }
+            i++;
+            k--;
+        }   
+        return ans;
+    }  
+}
+class Pair{
+    int x;
+    int y;
+
+    public Pair(int x, int y)
+    {
+        this.x=x;
+        this.y=y;
+     
+    }
+}
