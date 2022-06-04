@@ -1,0 +1,58 @@
+class Solution {
+    public boolean isSafe(char[][] ch, int r, int c)
+    {
+        for(int i=0;i<r;i++)
+        {
+            if(ch[i][c]=='Q') return false;
+        }
+         for(int i=0;i<c;i++)
+        {
+            if(ch[r][c]=='Q') return false;
+        }
+         for(int i=r-1,j=c+1;i>=0&&j<ch.length;i--,j++)
+        {
+            if(ch[i][j]=='Q') return false;
+        }
+         for(int i=r-1,j=c-1;i>=0&&j>=0;i--,j--)
+        {
+            if(ch[i][j]=='Q') return false;
+        }
+        return true;
+        
+    }
+    public List<String> create(char[][] ch)
+    {
+        List<String> l=new ArrayList<>();
+        for(int i=0;i<ch.length;i++)
+        {
+            l.add(new String(ch[i]));
+        }
+        return l;
+    }
+    public void fill(char[][] ch, int row, List<List<String>> res)
+    {
+        if(row==ch.length)
+        {
+            res.add(create(ch));
+            return;
+        }
+        for(int col=0;col<ch[row].length;col++)
+        {
+            if(isSafe(ch,row,col)){
+            ch[row][col]='Q';
+            fill(ch,row+1,res);
+            ch[row][col]='.';
+            }
+        }
+    }
+    public List<List<String>> solveNQueens(int n) {
+        char ch[][]=new char[n][n];
+        for(int i=0;i<n;i++)
+        {
+           Arrays.fill(ch[i],'.');
+        }
+        List<List<String>> res=new ArrayList<>();
+        fill(ch,0,res);
+        return res;
+    }
+}
