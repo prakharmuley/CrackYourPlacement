@@ -1,0 +1,44 @@
+class Solution {
+    public int calculate(String s) {
+       Stack<Integer> st=new Stack<>();
+        int ii=0;
+        int jj=s.length();
+        // while(ii<s.length()&&s.charAt(ii)==' ') ii++;
+        // while(jj>=0&&s.charAt(jj)==' ') jj--;
+        int val=0;
+        char op='+';
+        for(int i=0;i<s.length();i++)
+        {
+           boolean f=Character.isDigit(s.charAt(i));
+            if(f){
+            val= val*10+s.charAt(i)-'0';
+             }
+       
+            if(!f&&s.charAt(i)!=' '  || i==s.length()-1)
+            {
+             if(op=='+')
+             {
+                st.push(val);
+             }
+             if(op=='-')
+             {
+                st.push(-val);
+             }
+             if(op=='*')
+             {
+                st.push(st.pop()*val);
+             }
+             if(op=='/')
+             {
+                st.push(st.pop()/val);
+             }
+                op=s.charAt(i);
+                val=0;
+            }
+        }
+        int ans=0;
+        while(!st.isEmpty()) ans+=st.pop();
+        return ans;
+            
+    }
+}
