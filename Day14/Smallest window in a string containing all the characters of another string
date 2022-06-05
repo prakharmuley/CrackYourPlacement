@@ -1,0 +1,67 @@
+// { Driver Code Starts
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class GFG {
+	public static void main (String[] args) {
+		Scanner scan = new Scanner(System.in);
+		int test = scan.nextInt();
+		
+		while(test > 0){
+		    String s = scan.next();
+		    String t = scan.next();
+		    
+		    System.out.println(new Solution().smallestWindow(s, t));
+		    test--;
+		}
+	}
+}// } Driver Code Ends
+
+
+class Solution
+{
+    //Function to find the smallest window in the string s consisting
+    //of all the characters of string p.
+    public static String smallestWindow(String s, String p)
+    {
+        int f1[]=new int[256];
+        int f2[]=new int[256];
+        for(char c: p.toCharArray())
+        {
+         f1[c]++;
+        }
+        int st=-1;
+        int end=s.length();
+        int i=0;
+        int j=0;
+        int l=0;
+        while(j<s.length())
+        {
+            char ch=s.charAt(j);
+            if(f1[ch]!=0){
+            if(f2[ch]<f1[ch]) l++;
+            f2[ch]++;
+            }
+            while(l==p.length())
+            {
+                if(j-i+1<end)
+                {
+                    st=i;
+                    end=j-i+1;
+                }
+            
+            char c=s.charAt(i);
+            if(f1[c]!=0) {f2[c]--;
+            if(f2[c]<f1[c]) {l--;
+            }
+            }
+            i++;
+            }
+            j++;
+        }
+        return st==-1?"-1":s.substring(st,st+end);
+        
+        
+    }
+}
