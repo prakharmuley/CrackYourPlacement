@@ -1,0 +1,23 @@
+class Solution {
+ public boolean validSquare(int[] p1, int[] p2, int[] p3, int[] p4) {
+    Map<Integer, Integer> map = new TreeMap<>();   
+    map.put(dist(p1, p2), map.getOrDefault(dist(p1, p2), 0) + 1);
+    map.put(dist(p1, p3), map.getOrDefault(dist(p1, p3), 0) + 1);
+    map.put(dist(p1, p4), map.getOrDefault(dist(p1, p4), 0) + 1);
+    map.put(dist(p2, p3), map.getOrDefault(dist(p2, p3), 0) + 1);
+    map.put(dist(p2, p4), map.getOrDefault(dist(p2, p4), 0) + 1);
+    map.put(dist(p3, p4), map.getOrDefault(dist(p3, p4), 0) + 1);
+    
+    Iterator<Integer> it = map.values().iterator(); 
+    return map.size() == 2 && it.next() == 4 && it.next() == 2;
+}
+
+ 
+private int dist(int[] p1, int[] p2) {
+    return (p1[0] - p2[0]) * (p1[0] - p2[0]) + (p1[1] - p2[1]) * (p1[1] - p2[1]); 
+}
+        
+    
+       
+    
+}
