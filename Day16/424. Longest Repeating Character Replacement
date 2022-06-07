@@ -1,0 +1,24 @@
+class Solution {
+    public int characterReplacement(String s, int k) {
+        int h[]=new int[26];
+        int i=0,j=0,c=0,l=0,mx=0;
+        while(j<s.length())
+        {
+            
+          mx=Math.max(mx,++h[s.charAt(j)-'A']);  
+          int letters_to_change=(j-i+1)-mx;
+          if(i<s.length()&&letters_to_change>k)
+          {
+              h[s.charAt(i)-'A']--;
+              i++;
+          }
+            l=Math.max(l,j-i+1);
+            j++;
+            
+        }
+        
+        return l;
+        
+        
+    }
+}
