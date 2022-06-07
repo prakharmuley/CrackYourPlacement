@@ -1,0 +1,58 @@
+class Solution {
+    public String minWindow(String s, String t) {
+        if(t.length()>s.length()) return "";
+        if(s.equals(t)) return t;
+        int h1[]=new int[256];
+        int h2[]=new int[256];
+        for(char c: t.toCharArray()) h1[c]++;
+        for(char c: s.toCharArray()) h2[c]++;
+        for(int i=0;i<256;i++)
+        {
+            if(h1[i]!=0&&h2[i]==0) return "";
+        }
+        Arrays.fill(h2,0);
+        int i=0;
+        int j=0;
+        int st=-1;
+        int size=0;
+        int end=s.length();
+        int n=end;
+        while(j<n)
+        {
+            char c=s.charAt(j);
+            if(h1[c]!=0){
+                 h2[c]++; 
+             if(h2[c]<=h1[c])
+             {
+               size++;
+               
+             }
+            }
+            while(size==t.length())
+            {
+                if(j-i+1<=end)
+                {
+                    st=i;
+                    end=j-i+1;
+                }
+                char ch=' ';
+                if(i<s.length())  ch=s.charAt(i);
+                
+                if(h1[ch]!=0)
+                {
+                    h2[ch]--;
+                    if(h2[ch]<h1[ch])
+                    {
+                        size--;
+                        
+                    }
+                    
+                }
+                i++;
+                
+            }
+            j++;
+        }
+        return st==-1?"":s.substring(st,st+end);
+    }
+}
