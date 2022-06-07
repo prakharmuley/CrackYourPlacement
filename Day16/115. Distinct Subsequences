@@ -1,0 +1,36 @@
+class Solution {
+    public int fun (int[][] dp, String s, String t,int i, int j)
+    {
+        if(j==t.length())
+        {
+            return 1;
+        }
+        if(i==s.length())
+        {
+            return 0;
+        }
+        if(dp[i][j]!=-1)
+        {
+            return dp[i][j];
+        }
+        if(s.charAt(i)==t.charAt(j))
+        {
+            dp[i][j]=fun(dp,s,t,i+1,j+1)+fun(dp,s,t,i+1,j);
+        }
+        else
+        {
+            dp[i][j]=fun(dp,s,t,i+1,j);
+        }
+        return dp[i][j];
+    }
+    public int numDistinct(String s, String t) {
+        int[][] dp=new int[s.length()+5][t.length()+5];
+        for(int i=0;i<dp.length;i++) Arrays.fill(dp[i],-1);
+        int n=s.length();
+        int m=t.length();
+        return fun(dp,s,t,0,0);
+        
+        
+        
+    }
+}
