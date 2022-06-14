@@ -1,0 +1,14 @@
+public class Solution {
+    public static int ceilingInSortedArray(int n, int x, int[] arr) {
+        int l=0;
+        int r=n-1;
+        while(l<=r)
+        {
+            int m=l+((r-l)/2);
+            if(arr[m]==x) return x;
+            if(arr[m]<x) l=m+1;
+            else r=m-1;
+        }
+        return l==-1?-1:arr[l];
+    }
+}
