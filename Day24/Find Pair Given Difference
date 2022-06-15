@@ -1,0 +1,63 @@
+// { Driver Code Starts
+//Initial Template for Java
+import java.io.*;
+import java.util.*;
+class GfG
+{
+    public static void main (String[] args)
+    {
+        
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        
+        while(t-- > 0)
+        {
+            int l = sc.nextInt();
+            int n = sc.nextInt();
+            
+            int arr[] =  new int[l];
+            
+            for(int i = 0;i<l;i++)
+                arr[i] = sc.nextInt();
+            
+            Solution ob = new Solution();
+                
+            if(ob.findPair(arr, l, n)==true)
+                System.out.println(1);
+                
+            else
+                System.out.println(-1);    
+                
+        }
+        
+    }
+}// } Driver Code Ends
+
+
+//User function Template for Java
+
+class Solution
+{
+    public boolean exist(int t, int[] a, int h)
+    {
+        int l=0,r=h;
+        while(l<r)
+        {
+            int m=(l+((r-l)/2));
+            if(a[m]==t) return true;
+            else if(a[m]<t) l=m+1;
+            else r=m;
+        }
+        return false;
+    }
+    public boolean findPair(int a[], int size, int n)
+    {
+     Arrays.sort(a);
+     for(int i=0;i<size;i++)
+     {
+         if(exist(Math.abs(n-a[i]),a,i)) return true;
+     }
+     return false;
+    }
+    
+}
