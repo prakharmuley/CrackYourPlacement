@@ -1,0 +1,68 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+//Apprach 1 BFS
+class Solution {
+    public int sumOfLeftLeaves(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        Queue<Pair<TreeNode, Boolean>> queue = new LinkedList<>();
+        queue.offer(new Pair<>(root, false));
+
+        int result = 0;
+
+        while (!queue.isEmpty()) {
+            Pair<TreeNode, Boolean> cur = queue.poll();
+            TreeNode node = cur.getKey();
+            boolean isLeft = cur.getValue();
+
+            if (isLeft && node.left == null && node.right == null) {
+                result += node.val;
+                continue;
+            }
+
+            if (node.left != null) {
+                queue.offer(new Pair<>(node.left, true));
+            }
+            if (node.right != null) {
+                queue.offer(new Pair<>(node.right, false));
+            }
+        }
+
+        return result;
+    }
+}
+
+
+
+
+//Approach 2 DFS
+class Solution {
+    public int sumOfLeftLeaves(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int ans=0;
+        if(root.left!=null)
+        {
+            if(root.left.left==null&&root.left.right==null) ans+=root.left.val;
+            else ans+=sumOfLeftLeaves(root.left);
+        }
+        ans+=sumOfLeftLeaves(root.right);
+        
+        return ans;
+    }
+}
