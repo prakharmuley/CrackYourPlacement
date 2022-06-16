@@ -1,0 +1,18 @@
+class Solution {
+    public boolean isHappy(int n) {
+        while(n!=1)
+        {
+            int ans=0;
+            while(n!=0)
+            {
+               ans=ans+(n%10)*(n%10);
+                n/=10;
+                
+            }
+            n=ans;
+            if(ans==7) return true;
+            if(ans>1&&ans<10&&ans!=7) return false;
+        }
+        return true;
+    }
+}
