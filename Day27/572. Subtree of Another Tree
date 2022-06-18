@@ -1,0 +1,43 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public void generateString(TreeNode root, String[] s)
+    {
+        if(root==null) {s[0]+="#,"; return;}
+        s[0]+=String.valueOf(root.val+",");
+        generateString(root.left,s);
+        generateString(root.right,s);
+    }
+    public boolean isSubtree(TreeNode root, TreeNode sroot) {
+        String[] s=new String[1];
+        generateString(root,s);
+        StringBuilder sb_root=new StringBuilder(s[0]);
+        sb_root.delete(0,4);
+        s=new String[1];
+        generateString(sroot,s);
+        StringBuilder sb_sroot=new StringBuilder(s[0]);
+        sb_sroot.delete(0,4);
+        if(sb_root.equals(sb_sroot)) return true;
+        int idx=(sb_root.toString().indexOf(sb_sroot.toString())-1);
+        char c=' ';
+        if(idx>=0){
+         c=sb_root.toString().charAt(sb_root.toString().indexOf(sb_sroot.toString())-1);
+        }
+            
+        return (sb_root.toString().contains(sb_sroot.toString())&&c==',')||(idx<0&&sb_root.toString().contains(sb_sroot.toString()));
+        
+    }
+}
