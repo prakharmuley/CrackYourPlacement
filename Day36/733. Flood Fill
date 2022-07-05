@@ -1,0 +1,22 @@
+class Solution {
+    public void dfs(int r, int c, int[][] g, int nwcol,int oldcol, boolean[][] v)
+    {
+        if(r<0||c<0||r>=g.length||c>=g[0].length||g[r][c]!=oldcol||v[r][c])
+        {
+            return;
+        }
+        v[r][c]=true;
+        g[r][c]=nwcol;
+        dfs(r+1,c,g,nwcol,oldcol,v);
+        dfs(r,c+1,g,nwcol,oldcol,v);
+        dfs(r-1,c,g,nwcol,oldcol,v);
+        dfs(r,c-1,g,nwcol,oldcol,v);
+            
+    }
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        int oldcol=image[sr][sc];
+        boolean v[][]=new boolean[image.length][image[0].length];
+       dfs(sr,sc,image,newColor,oldcol,v);
+        return image;
+    }
+}
