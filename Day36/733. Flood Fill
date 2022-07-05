@@ -20,3 +20,30 @@ class Solution {
         return image;
     }
 }
+
+
+
+
+//O(1) Space
+class Solution {
+    public void dfs(int r, int c, int[][] g, int nwcol,int oldcol)
+    {
+        if(r<0||c<0||r>=g.length||c>=g[0].length||g[r][c]!=oldcol)
+        {
+            return;
+        }
+        
+        g[r][c]=nwcol;
+        dfs(r+1,c,g,nwcol,oldcol);
+        dfs(r,c+1,g,nwcol,oldcol);
+        dfs(r-1,c,g,nwcol,oldcol);
+        dfs(r,c-1,g,nwcol,oldcol);
+            
+    }
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        int oldcol=image[sr][sc];
+        if (image[sr][sc] == newColor) return image; 
+        dfs(sr,sc,image,newColor,oldcol);
+        return image;
+    }
+}
