@@ -1,0 +1,56 @@
+// { Driver Code Starts
+//Initial Template for Java
+
+import java.io.*;
+import java.util.*;
+
+class GFG
+{
+    public static void main(String args[])throws IOException
+    {
+        BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(read.readLine());
+        while(t-- > 0)
+        {
+            String input[] = read.readLine().trim().split(" ");
+            int n = Integer.parseInt(input[0]);
+            int m = Integer.parseInt(input[1]);
+            
+            String S1 = read.readLine().trim();
+            String S2 = read.readLine().trim();
+
+            Solution ob = new Solution();
+            System.out.println(ob.longestCommonSubstr(S1, S2, n, m));
+        }
+    }
+}// } Driver Code Ends
+
+
+//User function Template for Java
+
+class Solution{
+    public int lcs(String s1, String s2, int i, int j, Integer[][] dp,int[] l)
+    {
+        if(i>=s1.length()||j>=s2.length()) return 0;
+        if(dp[i][j]!=null) return dp[i][j];
+        int t=0;
+        if(s1.charAt(i)==s2.charAt(j))
+        {
+            t=(1+(lcs(s1,s2,i+1,j+1,dp,l)));
+          
+        }
+        int l2=lcs(s1,s2,i+1,j,dp,l);
+        int l3=lcs(s1,s2,i,j+1,dp,l);
+       
+        l[0]=Math.max(l[0],t);
+       
+        
+        return dp[i][j]=t;
+    }
+    int longestCommonSubstr(String S1, String S2, int n, int m){
+       Integer dp[][]=new Integer[n+1][m+1];
+     int l[]=new int[1];
+      lcs(S1,S2,0,0,dp,l);
+      return l[0];
+    }
+}
