@@ -1,0 +1,23 @@
+class Solution
+{
+    //Function to find the maximum number of cuts.
+    public int fun(int x, int y, int z, int n, int[] dp)
+    {
+        if(n==0) return 0;
+        if(dp[n]!=-1) return dp[n];
+        int a=Integer.MIN_VALUE,b=Integer.MIN_VALUE,c=Integer.MIN_VALUE;
+        if(n>=x)  a=fun(x,y,z,n-x,dp); 
+        if(n>=y)  b=fun(x,y,z,n-y,dp);
+        if(n>=z)  c=fun(x,y,z,n-z,dp);
+        
+        return dp[n]=1+Math.max(Math.max(a,b),c);
+        
+    }
+    public int maximizeCuts(int n, int x, int y, int z)
+    {
+        int dp[]=new int[10005];
+      
+        Arrays.fill(dp,-1);
+        return fun(x,y,z,n,dp)<0?0:fun(x,y,z,n,dp);
+    }
+}
