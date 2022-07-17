@@ -1,0 +1,81 @@
+// { Driver Code Starts
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG
+{
+    public static void main(String[] args) throws IOException
+    {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int T = Integer.parseInt(br.readLine().trim());
+        while(T-->0)
+        {
+            int n = Integer.parseInt(br.readLine().trim());
+            int[] nums = new int[n];
+            String[] S = br.readLine().trim().split(" ");
+            for(int i = 0; i < n; i++){
+                nums[i] = Integer.parseInt(S[i]);
+            }
+            Solution obj = new Solution();
+            int ans = obj.minSwaps(nums);
+            System.out.println(ans);
+       }
+    }
+}// } Driver Code Ends
+
+
+
+// class Pair{
+//     int ele;
+//     int idx;
+//     public Pair(int e, int i)
+//     {
+//         ele=e;
+//         idx=i;
+//     }
+// }
+// class Comp implements Comparator<Pair>
+// {
+//     public int compare(Pair p1, Pair p2)
+//     {
+//         return Integer.compare(p1.ele,p2.ele);
+//     }
+// }
+class Solution
+{
+    public void swap(int []a, int x, int y)
+    {
+        int temp=a[x];
+        a[x]=a[y];
+        a[y]=temp;
+    }
+    public int idx (int []a , int ele)
+    {
+        for(int i=0;i<a.length;i++)
+        {
+            if(a[i]==ele) return i;
+        }
+        return -1;
+    }
+    //Function to find the minimum number of swaps required to sort the array.
+    public int minSwaps(int a[])
+    {
+        // Code here
+        int n=a.length,c=0,i=0;
+       // int []temp=new int[n];
+      int[] temp = Arrays.copyOfRange(a, 0, n);
+     Arrays.sort(temp);
+     for( i=0;i<n;i++)
+     {
+         if(a[i]!=temp[i])
+         {
+             c++;
+             swap(a,i,idx(a,temp[i]));
+         }
+     }
+     return c;
+     
+     
+    }
+        
+}
