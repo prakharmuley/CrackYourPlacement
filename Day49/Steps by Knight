@@ -1,0 +1,107 @@
+// { Driver Code Starts
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG
+{
+    public static void main(String[] args) throws IOException
+    {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int T = Integer.parseInt(br.readLine().trim());
+        while(T-->0)
+        {
+            int N = Integer.parseInt(br.readLine().trim());
+            String[] S1 = br.readLine().trim().split(" ");
+            String[] S2 = br.readLine().trim().split(" ");
+            int[] KnightPos = new int[2];
+            int[] TargetPos = new int[2];
+            for(int i = 0; i < 2; i++){
+                KnightPos[i] = Integer.parseInt(S1[i]);
+                TargetPos[i] = Integer.parseInt(S2[i]);
+            }
+            Solution obj = new Solution();
+            int ans = obj.minStepToReachTarget(KnightPos, TargetPos, N);
+            System.out.println(ans);
+       }
+    }
+}
+// } Driver Code Ends
+
+
+class Solution
+{
+    //Function to find out minimum steps Knight needs to reach target position.
+    public int bfs(int sx, int sy,Queue<int[]> q, int tx, int ty, int[][] mat, int n, int c)
+    {
+        while(!q.isEmpty())
+        {
+            ++c;
+            int l=q.size();
+            for(int i=0;i<l;i++)
+            {
+                int d[]=q.poll();
+                int dx=d[0]; int dy=d[1];
+                if(dx==tx&&dy==ty)
+                {
+                    return c;
+                }
+                mat[dx][dy]=1;
+                if(dx-2>=0&&dy-1>=0&&mat[dx-2][dy-1]==0)
+                {
+                    mat[dx-2][dy-1]=1;
+                    q.offer(new int[]{dx-2,dy-1});
+                }
+                 if(dx-2>=0&&dy+1<n&&mat[dx-2][dy+1]==0)
+                {
+                    mat[dx-2][dy+1]=1;
+                    q.offer(new int[]{dx-2,dy+1});
+                }
+                 if(dx-1>=0&&dy-2>=0&&mat[dx-1][dy-2]==0)
+                {
+                    mat[dx-1][dy-2]=1;
+                    q.offer(new int[]{dx-1,dy-2});
+                }
+                 if(dx-1>=0&&dy+2<n&&mat[dx-1][dy+2]==0)
+                {
+                    mat[dx-1][dy+2]=1;
+                    q.offer(new int[]{dx-1,dy+2});
+                }
+                 if(dx+1<n&&dy-2>=0&&mat[dx+1][dy-2]==0)
+                {
+                    mat[dx+1][dy-2]=1;
+                    q.offer(new int[]{dx+1,dy-2});
+                }
+                 if(dx+1<n&&dy+2<n&&mat[dx+1][dy+2]==0)
+                {
+                    mat[dx+1][dy+2]=1;
+                    q.offer(new int[]{dx+1,dy+2});
+                }
+                 if(dx+2<n&&dy+1<n&&mat[dx+2][dy+1]==0)
+                {
+                    mat[dx+2][dy+1]=1;
+                    q.offer(new int[]{dx+2,dy+1});
+                }
+                 if(dx+2<n&&dy-1>=0&&mat[dx+2][dy-1]==0)
+                {
+                    mat[dx+2][dy-1]=1;
+                    q.offer(new int[]{dx+2,dy-1});
+                }
+            }
+        }
+        return -1;
+        
+     
+    }
+    public int minStepToReachTarget(int KnightPos[], int TargetPos[], int N)
+    {
+       int ans[]=new int[1];
+       ans[0]=Integer.MAX_VALUE;
+       int mat[][]=new int[N][N];
+       int stx=KnightPos[0],sty=KnightPos[1];
+       int tarx=TargetPos[0],tary=TargetPos[1];
+       Queue<int[]> q=new LinkedList<>();
+       q.offer(new int[]{stx-1,sty-1});
+       return bfs(stx,sty,q,tarx-1,tary-1,mat,N,-1);
+
+    }
+}
