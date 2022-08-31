@@ -1,0 +1,32 @@
+public class Solution {
+    public static void fun(  ArrayList < ArrayList < Integer >> al, BinaryTreeNode<Integer> root, int k,ArrayList < Integer > l)
+    {
+        if(root==null) return;
+        l.add(root.data);
+        fun(al,root.left,k,l);
+        fun(al,root.right,k,l);
+        long sum=0;
+        for(int i=l.size()-1;i>=0;i--)
+        {
+            sum+=(long)(l.get(i));
+            if(sum==(long)k) 
+            {
+                 ArrayList<Integer> r=new ArrayList<>();
+                for (int j = i; j < l.size(); j++)
+                { 
+                    r.add(l.get(j));
+                }
+                al.add(r);
+            }
+        }
+        l.remove(l.size()-1);     
+    }
+    
+    public static ArrayList < ArrayList < Integer >> kPathSum(BinaryTreeNode < Integer > root, int k) {
+        // Write your code here.
+        ArrayList < ArrayList < Integer >> al=new ArrayList<>();
+        ArrayList < Integer > l=new ArrayList<>();
+       fun(al,root,k,l);
+        return al;
+    }
+}
