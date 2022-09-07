@@ -1,0 +1,52 @@
+class Solution {
+    public boolean dfs(int node,List<Integer>[] adj, int[] vis, int[] pvis, int[] c)
+    {
+        vis[node]=1;
+        pvis[node]=1;
+        for(int x: adj[node])
+        {
+            if(vis[x]==0)
+            {
+                if(dfs(x,adj,vis,pvis,c)) return true;
+            }
+            else 
+            {
+                if(pvis[x]==1) return true;
+            }
+        }
+        c[node]=1;
+        pvis[node]=0;
+        return false;
+        
+    }
+    public List<Integer> eventualSafeNodes(int[][] g) {
+        int n=g.length;
+        List<Integer>[] adj=new ArrayList[n];
+        for(int i=0;i<n;i++) adj[i]=new ArrayList<>();
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<g[i].length;j++)
+            {
+                adj[i].add(g[i][j]);
+            }
+        }
+        
+        Set<Integer> hs=new TreeSet<>();
+        int vis[]=new int[n];
+         int pvis[]=new int[n];
+        int check[]=new int[n];
+        for(int i=0;i<n;i++)
+        {       
+         dfs(i,adj,vis,pvis,check);    
+        }
+         for(int i=0;i<n;i++)
+        {    
+         if(check[i]==1)    
+           hs.add(i);   
+        }
+        
+        return  new ArrayList<>(hs);
+        
+        
+    }
+}
