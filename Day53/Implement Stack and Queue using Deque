@@ -1,0 +1,72 @@
+Stack Using Deque
+public class Stack {
+    Deque<Integer> q;
+	Stack() {
+     q=new LinkedList<Integer>();
+	}
+  
+	public boolean push(int x) {
+		q.offerLast(x);
+        return true;
+	}
+
+	public int pop() {
+        if(!q.isEmpty())
+         return q.pollLast();
+        return -1;
+	}
+
+	public int top() {
+        if(!q.isEmpty()) 
+         return q.peekLast();
+        
+        return -1;
+	}
+
+	public boolean isEmpty() {
+        return q.isEmpty();
+	}
+
+	public int size() {
+        return q.size();
+	}
+}
+
+
+
+Queue Using Deque
+public class Queue {
+    Deque<Integer> q;
+	Stack() {
+     q=new LinkedList<Integer>();
+	}
+
+	public boolean push(int x) {
+		q.offerFirst(x);
+        return true;
+	}
+
+	public int pop() {
+        if(!q.isEmpty())
+         return q.pollFirst();
+         
+        return -1;
+	}
+
+	public int top() {
+        if(!q.isEmpty()) 
+         return q.peekFirst();
+        
+        return -1;
+	}
+
+
+	public boolean isEmpty() {
+        return q.isEmpty();
+	}
+
+
+	public int size() {
+        return q.size();
+	}
+}
